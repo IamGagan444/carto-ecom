@@ -59,6 +59,7 @@ const ConfirmOrder = () => {
           name: "Gagan-carto limited",
           description: "Test Transaction",
           image: "https://example.com/your_logo",
+
           order_id: order.id,
           handler: async function (response) {
             const body = {
