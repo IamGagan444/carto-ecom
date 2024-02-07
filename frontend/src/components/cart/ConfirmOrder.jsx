@@ -43,7 +43,7 @@ const ConfirmOrder = () => {
   const paymentHandler = async (e) => {
     if (selectedSort == 2) {
       try {
-        const response = await fetch("http://localhost:5000/order", {
+        const response = await fetch("https://carto-ecom-api.vercel.app/order", {
           method: "post",
           body: JSON.stringify({ amount, currency, receipt }),
           headers: {
@@ -65,7 +65,7 @@ const ConfirmOrder = () => {
               ...response,
             };
             const validateRes = await fetch(
-              "http://localhost:5000/order/validate",
+              "https://carto-ecom-api.vercel.app/order/validate",
               {
                 method: "POST",
                 body: JSON.stringify(body),
