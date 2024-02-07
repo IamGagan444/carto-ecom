@@ -43,7 +43,7 @@ const ConfirmOrder = () => {
   const paymentHandler = async (e) => {
     if (selectedSort == 2) {
       try {
-        const response = await fetch("http://localhost:5000/order", {
+        const response = await fetch("https://backend-carto-api.onrender.com/order", {
           method: "post",
           body: JSON.stringify({ amount, currency, receipt }),
           headers: {
@@ -66,7 +66,7 @@ const ConfirmOrder = () => {
               ...response,
             };
             const validateRes = await fetch(
-              "http://localhost:5000/validate",
+              "https://backend-carto-api.onrender.com/order/validate",
               {
                 method: "POST",
                 body: JSON.stringify(body),

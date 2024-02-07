@@ -9,7 +9,7 @@ import Select from "@mui/material/Select";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 const Shiping = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   let initialValues = {
     name: "",
     email: "",
@@ -20,54 +20,69 @@ const Shiping = () => {
     landmark: "",
   };
 
-  let { values, errors, touched, handleBlur, handleChange, handleSubmit,setValues } =
-    useFormik({
-      initialValues,
-      validationSchema: order_details,
-      onSubmit: (values) => {
-        localStorage.setItem("userAddress",JSON.stringify(values))
-        navigate("/checkout/confirm-order-details")
-        toast.success("Your address has saved")
-      },
-    });
-   
+  let {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setValues,
+  } = useFormik({
+    initialValues,
+    validationSchema: order_details,
+    onSubmit: (values) => {
+      localStorage.setItem("userAddress", JSON.stringify(values));
+      navigate("/checkout/confirm-order-details");
+      toast.success("Your address has saved");
+    },
+  });
 
-useEffect(()=>{
-  setValues(JSON.parse(localStorage.getItem("userAddress")))
-},[])
+  useEffect(() => {
+    setValues(
+      JSON.parse(localStorage.getItem("userAddress")) || {
+        name: "",
+        email: "",
+        phoneNumber: "",
+        state: "",
+        city: "",
+        address: "",
+        landmark: "",
+      }
+    );
+  }, []);
 
-console.log("values:",values)
-   const states_of_india = [
-      "Andhra Pradesh",
-      "Arunachal Pradesh",
-      "Assam",
-      "Bihar",
-      "Chhattisgarh",
-      "Goa",
-      "Gujarat",
-      "Haryana",
-      "Himachal Pradesh",
-      "Jharkhand",
-      "Karnataka",
-      "Kerala",
-      "Madhya Pradesh",
-      "Maharashtra",
-      "Manipur",
-      "Meghalaya",
-      "Mizoram",
-      "Nagaland",
-      "Odisha",
-      "Punjab",
-      "Rajasthan",
-      "Sikkim",
-      "Tamil Nadu",
-      "Telangana",
-      "Tripura",
-      "Uttar Pradesh",
-      "Uttarakhand",
-      "West Bengal"
-  ]
-  
+  console.log("values:", values);
+  const states_of_india = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+  ];
 
   return (
     <section className="gradient">
@@ -86,12 +101,12 @@ console.log("values:",values)
           size="small"
           className="w-full capitalize"
           name="name"
-          value={values.name}
+          value={values?.name}
           onChange={handleChange}
           onBlur={handleBlur}
           autoComplete="new-password"
           onFocus={(e) => e.target.setAttribute("autocomplete", "new-password")}
-          sx={{textTransform:"uppercase"}}
+          sx={{ textTransform: "uppercase" }}
         />
         <p
           className={`${
@@ -109,7 +124,7 @@ console.log("values:",values)
           type="number"
           className="w-full"
           name="phoneNumber"
-          value={values.phoneNumber}
+          value={values?.phoneNumber}
           onChange={handleChange}
           onBlur={handleBlur}
           autoComplete="new-password"
@@ -131,7 +146,7 @@ console.log("values:",values)
           type="email"
           className="w-full"
           name="email"
-          value={values.email}
+          value={values?.email}
           onChange={handleChange}
           onBlur={handleBlur}
           autoComplete="new-password"
@@ -151,7 +166,7 @@ console.log("values:",values)
             <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
-              value={values.state}
+              value={values?.state}
               label="state"
               name="state"
               onChange={handleChange}
@@ -161,12 +176,14 @@ console.log("values:",values)
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-             
-              {
-                states_of_india?.map((item,ind)=>{
-                  return  <MenuItem value={item} key={ind+4}>{item}</MenuItem>
-                })
-              }
+
+              {states_of_india?.map((item, ind) => {
+                return (
+                  <MenuItem value={item} key={ind + 4}>
+                    {item}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
           <TextField
@@ -178,7 +195,7 @@ console.log("values:",values)
             name="city"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.city}
+            value={values?.city}
             autoComplete="new-password"
             onFocus={(e) =>
               e.target.setAttribute("autocomplete", "new-password")
@@ -211,7 +228,7 @@ console.log("values:",values)
           name="address"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.address}
+          value={values?.address}
           autoComplete="new-password"
           onFocus={(e) => e.target.setAttribute("autocomplete", "new-password")}
         />
@@ -232,7 +249,7 @@ console.log("values:",values)
           name="landmark"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.landmark}
+          value={values?.landmark}
           autoComplete="new-password"
           onFocus={(e) => e.target.setAttribute("autocomplete", "new-password")}
         />
@@ -245,11 +262,7 @@ console.log("values:",values)
         </p>
         <br />
         {/* <Link to={"/confirm_order"}>   <button type="submit" className="button2 my-8 w-full">Confirm Order</button></Link> */}
-        <button
-          type="submit"
-          className="button2 my-8 w-full"
-         
-        >
+        <button type="submit" className="button2 my-8 w-full">
           Confirm Order
         </button>
       </form>
