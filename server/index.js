@@ -56,7 +56,7 @@ app.post("/order/validate", async (req, res) => {
   });
 });
 app.get("/", (req, res) => {
-  res.send("<h1>this is working fine</h1>");
+  res.send("<h1>this is working</h1>");
 });
 
 app.listen(PORT, () => {

@@ -9,7 +9,7 @@ const WishList = lazy(() => import("./components/wishlist/WishList.jsx"));
 const Shiping = lazy(() => import("./components/my-order/Shiping.jsx"));
 const ConfirmOrder = lazy(() => import("./components/cart/ConfirmOrder"));
 const PaymentSucess = lazy(() => import("./components/cart/PaymentSucess"));
-const Login = lazy(() => import("./components/login/Login"));
+const Login = lazy(() => import("./components/layout/Contact.jsx"));
 const Profile = lazy(() => import("./components/profile/Profile"));
 const Myorder = lazy(() => import("./components/my-order/Myorder"));
 const OrderDetails = lazy(() =>
