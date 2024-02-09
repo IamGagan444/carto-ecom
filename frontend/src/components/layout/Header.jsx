@@ -63,6 +63,30 @@ const Header = () => {
     setActiveLink(location.pathname);
   }, [location]);
 
+  const [isNavigationBarVisible, setIsNavigationBarVisible] = useState(true);
+
+  useEffect(() => {
+    let prevScrollPos = window.pageYOffset;
+
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+
+      if (prevScrollPos > currentScrollPos) {
+        setIsNavigationBarVisible(true); // Show navigation bar if scrolling up
+      } else {
+        setIsNavigationBarVisible(false); // Hide navigation bar if scrolling down
+      }
+
+      prevScrollPos = currentScrollPos;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   if (isLoading) {
     return (
       <div className=" h-screen w-full grid place-items-center bg-white absolute z-20 inset-0">
@@ -234,50 +258,89 @@ const Header = () => {
       )}
 
       {/* mobiles and tablets */}
-      <div className="flex px-6 items-center justify-between sg:hidden bg-white dark:bg-black fixed bottom-0 w-full h-[4rem] cu500:h-[4.5rem] z-10 ">
-        <NavLink className="hover:font-bold flex flex-col items-center" to="/">
-          <GoHome className="text-2xl dark:text-white" />
-          <p className="hidden cu500:block text-[10px] text-white my-[2px]">
-            Home
-          </p>
+      <div
+        className={`flex px-6 rounded-t-3xl  justify-between sg:hidden bg-white dark:bg-black fixed bottom-0 w-full h-[4rem] cu500:h-[4.5rem] z-10 ${
+          isNavigationBarVisible ? "" : "hidden"
+        }`}
+      >
+        <NavLink
+          className="hover:font-bold flex flex-col items-center pt-3 px-2 "
+          to="/"
+          style={({ isActive, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold " : "",
+              color: isActive ? "#E91E63" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+              borderTop: isActive ? "3px solid #E91E63" : "3px solid black",
+            };
+          }}
+        >
+          <GoHome className="text-2xl " />
+          <p className="hidden cu500:block text-[10px]  my-[2px]">Home</p>
         </NavLink>
         <NavLink
-          className="hover:font-bold flex flex-col items-center cu500:hidden"
+          className="hover:font-bold flex flex-col items-center pt-3 px-2 cu500:hidden"
           to="/search-products"
+          style={({ isActive, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold " : "",
+              color: isActive ? "#E91E63" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+              borderTop: isActive ? "3px solid #E91E63" : "3px solid black",
+            };
+          }}
         >
-          <CiSearch className="text-2xl dark:text-white" />
-          <p className="hidden cu500:block text-[10px] text-white my-[2px]">
-            Search
-          </p>
+          <CiSearch className="text-2xl " />
+          <p className="hidden cu500:block text-[10px] my-[2px]">Search</p>
         </NavLink>
         <NavLink
-          className="hover:font-bold hidden cu500:flex flex-col items-center"
+          className="hover:font-bold hidden cu500:flex flex-col pt-3 px-2 items-center"
           to="/all-products-carto"
+          style={({ isActive, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold " : "",
+              color: isActive ? "#E91E63" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+              borderTop: isActive ? "3px solid #E91E63" : "3px solid black",
+            };
+          }}
         >
-          <BsColumnsGap className="text-lg dark:text-white my-[3px]" />
-          <p className="hidden cu500:block text-[10px] text-white my-[3px]">
+          <BsColumnsGap className="text-lg my-[3px]" />
+          <p className="hidden cu500:block text-[10px]  my-[3px]">
             All products
           </p>
         </NavLink>
         <NavLink
-          className="hover:font-bold flex flex-col items-center"
+          className="hover:font-bold flex flex-col pt-3 px-2 items-center"
           to="/products-category"
+          style={({ isActive, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold " : "",
+              color: isActive ? "#E91E63" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+              borderTop: isActive ? "3px solid #E91E63" : "3px solid black",
+            };
+          }}
         >
-          <TbCategory className="text-2xl dark:text-white" />
-          <p className="hidden cu500:block text-[10px] text-white my-[2px]">
-            Category
-          </p>
+          <TbCategory className="text-2xl " />
+          <p className="hidden cu500:block text-[10px]  my-[2px]">Category</p>
         </NavLink>
 
         <NavLink
-          className="hover:font-bold flex flex-col items-center "
+          className="hover:font-bold flex flex-col pt-3 px-2 items-center "
           to={isAuthenticated && "/checkout/wishlist"}
           onClick={() => (isAuthenticated ? "" : loginWithRedirect())}
+          style={({ isActive, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold " : "",
+              color: isActive&&isAuthenticated ? "#E91E63" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+              borderTop: isActive&&isAuthenticated ? "3px solid #E91E63" : "3px solid black",
+            };
+          }}
         >
-          <IoMdHeartEmpty className="text-2xl dark:text-white" />
-          <p className="hidden cu500:block text-[10px] text-white my-[2px]">
-            WishList
-          </p>
+          <IoMdHeartEmpty className="text-2xl " />
+          <p className="hidden cu500:block text-[10px] my-[2px]">WishList</p>
         </NavLink>
 
         <NavLink
@@ -288,24 +351,29 @@ const Header = () => {
                 : "/user-profile"
               : ""
           }
+          style={({ isActive, isTransitioning }) => {
+            return {
+              fontWeight: isActive ? "bold " : "",
+              color: isActive&&isAuthenticated ? "#E91E63" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+              borderTop: isActive&&isAuthenticated ? "3px solid #E91E63" : "3px solid black",
+            };
+          }}
         >
           {isAuthenticated ? (
-            <div className="hover:font-bold flex flex-col items-center">
-              <FaRegUserCircle className="text-2xl dark:text-white" />{" "}
-              <p className="hidden cu500:block text-[10px] text-white my-[2px]">
+            <div className="hover:font-bold flex flex-col items-center pt-3 px-2">
+              <FaRegUserCircle className="text-2xl " />{" "}
+              <p className="hidden cu500:block text-[10px]  my-[2px]">
                 Profile
               </p>{" "}
             </div>
           ) : (
             <div
-              className="hover:font-bold flex flex-col items-center"
+              className="hover:font-bold flex flex-col items-center pt-3 px-2"
               onClick={() => loginWithRedirect()}
             >
-              <FiLogIn className="text-2xl dark:text-white" />{" "}
-              <p className="hidden cu500:block text-[10px] text-white my-[3px]">
-                {" "}
-                Login
-              </p>{" "}
+              <FiLogIn className="text-2xl " />{" "}
+              <p className="hidden cu500:block text-[10px]  my-[3px]"> Login</p>{" "}
             </div>
           )}
         </NavLink>

@@ -17,7 +17,7 @@ const Footer = () => {
      <h2 className="text-center bg-white font-bold text-2xl p-1 text-yellow-600"> Welcome to our<span className="text-yellow-600"> carto</span></h2>
     <div className="text-white p-7  flex justify-around flex-col sm:flex-row place-items-center text-center sm:text-left ">
       <div className=" ">
-        <div className="flex items-center space-x-1 mx-auto">
+        <div className="flex items-center justify-center sm:justify-start space-x-1 mx-auto">
           <FaOpencart className=" text-4xl" />
           <SiCarto className="text-6xl" />
         </div>
@@ -77,7 +77,7 @@ const Footer = () => {
       </div>
     
     </div>
-    <h2 className="text-center bg-white font-bold text-xl text-yellow-600 p-1">Gagan Pallai ❤️ 2023</h2>
+    <h2 className="text-center bg-white font-bold text-xl text-yellow-600 p-1">Gagan Pallai ❤️ 2024</h2>
    </motion.footer>
   );
 };

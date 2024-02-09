@@ -4,11 +4,18 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsChevronRight } from "react-icons/bs";
 // import MailIcon from '@mui/icons-material/Mail';
 import { BiMenuAltLeft } from "react-icons/bi";
 import ListItem from "@mui/material/ListItem";
+import { GoHome } from "react-icons/go";
+import { GiNurseMale } from "react-icons/gi";
+import { GiFemaleVampire } from "react-icons/gi";
+import { MdOutlinePhonelink } from "react-icons/md";
+import { MdOutlineLocalLibrary } from "react-icons/md";
+import { GrContact } from "react-icons/gr";
+import { BiSolidUserDetail } from "react-icons/bi";
 export default function Menus() {
   const [state, setState] = React.useState({
     right: false,
@@ -36,70 +43,121 @@ export default function Menus() {
       <Divider />
       <List className=" w-full ">
         <ListItem>
-          <div className="my-4 capitalize space-y-6 w-full ">
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-gray-800 mx-4 px-2 py-1 rounded-s-lg text-white"
+          <div className="my-4 capitalize space-y-6 w-full  ">
+            <NavLink
+              to="/"
+              className="pl-7 flex items-center space-x-4 text-xl font-semibold  p-1 rounded-lg"
+              style={({ isActive, isPending, isTransitioning }) => {
+                return {
+                  fontWeight: isActive ? "bold " : "",
+                  color: isPending ? "red" : "black",
+                  viewTransitionName: isTransitioning ? "slide" : "",
+                  background:isActive?"#CFD8DC":""
+                 
+                };
+              }}
             >
+              <GoHome />
               <p className="text-sm my-1 hover:font-semibold">Home</p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
+            </NavLink>
+            <NavLink
+               to="/mens-category"
+              className="pl-7 flex items-center space-x-4 text-xl font-semibold  p-1 rounded-lg"
+              style={({ isActive, isPending, isTransitioning }) => {
+                return {
+                  fontWeight: isActive ? "bold " : "",
+                  color: isPending ? "red" : "black",
+                  viewTransitionName: isTransitioning ? "slide" : "",
+                  background:isActive?"#CFD8DC":""
+                 
+                };
+              }}
             >
+              < GiNurseMale  />
               <p className="text-sm my-1 hover:font-semibold">Men</p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
+            </NavLink>
+            <NavLink
+                 to="/womens-category"
+              className="pl-7 flex items-center space-x-4 text-xl font-semibold  p-1 rounded-lg"
+              style={({ isActive, isPending, isTransitioning }) => {
+                return {
+                  fontWeight: isActive ? "bold " : "",
+                  color: isPending ? "red" : "black",
+                  viewTransitionName: isTransitioning ? "slide" : "",
+                  background:isActive?"#CFD8DC":""
+                 
+                };
+              }}
             >
+              < GiFemaleVampire />
               <p className="text-sm my-1 hover:font-semibold">Women</p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
+            </NavLink>
+
+            <NavLink
+              to="/tech-elctronics-category"
+              className="pl-7 flex items-center space-x-4 text-xl font-semibold  p-1 rounded-lg"
+              style={({ isActive, isPending, isTransitioning }) => {
+                return {
+                  fontWeight: isActive ? "bold " : "",
+                  color: isPending ? "red" : "black",
+                  viewTransitionName: isTransitioning ? "slide" : "",
+                  background:isActive?"#CFD8DC":""
+                 
+                };
+              }}
             >
-              <p className="text-sm my-1 hover:font-semibold">Beauty</p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
+              <MdOutlinePhonelink />
+              <p className="text-sm my-1 hover:font-semibold">Tech</p>
+            </NavLink>
+            <NavLink
+              to="/other-products-category"
+              className="pl-7 flex items-center space-x-4 text-xl font-semibold  p-1 rounded-lg"
+              style={({ isActive, isPending, isTransitioning }) => {
+                return {
+                  fontWeight: isActive ? "bold " : "",
+                  color: isPending ? "red" : "black",
+                  viewTransitionName: isTransitioning ? "slide" : "",
+                  background:isActive?"#CFD8DC":""
+                 
+                };
+              }}
             >
-              <p className="text-sm my-1 hover:font-semibold">Mobiles</p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
+              <MdOutlineLocalLibrary  />
+              <p className="text-sm my-1 hover:font-semibold">other</p>
+            </NavLink>
+
+            <NavLink
+              to="/contact"
+              className="pl-7 flex items-center space-x-4 text-xl font-semibold  p-1 rounded-lg"
+              style={({ isActive, isPending, isTransitioning }) => {
+                return {
+                  fontWeight: isActive ? "bold " : "",
+                  color: isPending ? "red" : "black",
+                  viewTransitionName: isTransitioning ? "slide" : "",
+                  background:isActive?"#CFD8DC":""
+                 
+                };
+              }}
             >
-              <p className="text-sm my-1 hover:font-semibold">Electronics</p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
-            >
-              <p className="text-sm my-1 hover:font-semibold">Groceries </p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
-            >
+              <GrContact />
               <p className="text-sm my-1 hover:font-semibold">Contact us </p>
-              <BsChevronRight  />
-            </Link>
-            <Link
-              to="/mens"
-              className="flex items-center justify-between w-[220px] bg-black mx-4 px-2 py-1 rounded-s-lg text-white"
+            </NavLink>
+            <NavLink
+              to="/about-us"
+              className="pl-7 flex items-center space-x-4 text-xl font-semibold  p-1 rounded-lg"
+              style={({ isActive, isPending, isTransitioning }) => {
+                return {
+                  fontWeight: isActive ? "bold " : "",
+                  color: isPending ? "red" : "black",
+                  viewTransitionName: isTransitioning ? "slide" : "",
+                  background:isActive?"#CFD8DC":""
+                 
+                };
+              }}
             >
+              < BiSolidUserDetail  />
               <p className="text-sm my-1 hover:font-semibold">aboout us</p>
-              <BsChevronRight  />
-            </Link>
+            </NavLink>
           </div>
         </ListItem>
       </List>

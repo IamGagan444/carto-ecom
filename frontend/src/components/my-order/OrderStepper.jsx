@@ -41,11 +41,11 @@ const OrderStepper = () => {
   };
 
   return (
-    <div className="mt-[4.4rem] h-screen val-bg4">
+    <div className="mt-[4rem] md:mt-[4.4rem] h-screen val-bg4">
       <h2 className="text-xl sm:text-3xl font-semibold text-center text-slate-700 py-10">
         Order status
       </h2>
-      <div className=" bg-white  w-[450px] mx-auto px-4 py-10 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
+      <div className=" bg-white w-[98%]  cu500:w-[450px] mx-auto px-4 py-10 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((step, index) => (
             <Step key={step.label}>

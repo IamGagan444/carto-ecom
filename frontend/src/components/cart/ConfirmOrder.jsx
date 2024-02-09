@@ -8,6 +8,8 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, getTotals } from "../../redux/cartSlice";
+import myPhote from "./img/my.jpeg";
+import Loader from "../Loader/Loader";
 const ConfirmOrder = () => {
   const Dispatch = useDispatch();
   const { cartSlice } = useSelector((state) => state);
@@ -38,18 +40,24 @@ const ConfirmOrder = () => {
       </svg>
     );
   }
+  const [isLoading, setIsloading] = useState(false);
+ 
   const [selectedSort, setSelectedSort] = useState("");
   const order_data = JSON.parse(localStorage.getItem("cartItems"));
   const paymentHandler = async (e) => {
     if (selectedSort == 2) {
+      setIsloading(true); // Set loading to true when payment process starts
       try {
-        const response = await fetch("https://backend-carto-api.onrender.com/order", {
-          method: "post",
-          body: JSON.stringify({ amount, currency, receipt }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://backend-carto-api.onrender.com/order",
+          {
+            method: "post",
+            body: JSON.stringify({ amount, currency, receipt }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         const order = await response.json();
         var options = {
@@ -58,8 +66,7 @@ const ConfirmOrder = () => {
           currency,
           name: "Gagan-carto limited",
           description: "Test Transaction",
-          image: "https://example.com/your_logo",
-
+          image: myPhote,
           order_id: order.id,
           handler: async function (response) {
             const body = {
@@ -95,6 +102,7 @@ const ConfirmOrder = () => {
         };
         var rzp1 = new window.Razorpay(options);
         rzp1.on("payment.failed", function (response) {
+          setIsloading(false); // Set loading to false on payment failure
           alert(response.error.code);
           alert(response.error.description);
           alert(response.error.source);
@@ -109,6 +117,7 @@ const ConfirmOrder = () => {
         console.log("Razorpay Response:", order);
       } catch (error) {
         console.error("Fetch error:", error);
+        setIsloading(false); // Set loading to false on fetch error
       }
     } else if (selectedSort == 1) {
       navigate("/payment_success");
@@ -116,7 +125,13 @@ const ConfirmOrder = () => {
       Dispatch(clearCart());
     }
   };
-
+  if (isLoading) {
+    return (
+      <div className="h-screen grid place-items-center bg-white bottom-0 top-0 right-0 left-0">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <section className="gradient h-screen grid place-items-center">
       <form

@@ -75,7 +75,7 @@ const Cart = () => {
   };
 
   return (
-    <section className="bg-slate-100 mt-[4.4rem] py-10">
+    <section className="bg-slate-100 mt-[4rem] md:mt-[4.4rem] py-10">
   {
     cartData&&cartData.length>0?  <div>
     <h2 className="text-lg font-semibold sm:text-2xl mx-6 ">

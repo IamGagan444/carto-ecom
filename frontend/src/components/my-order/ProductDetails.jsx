@@ -50,7 +50,7 @@ const ProductDetails = () => {
 
   return (
     <section className="bg-white pt-[4.7rem] sm:mt-[2.5rem] flex flex-col sm:flex-row justify-evenly w-[full] cu400:w-[95%] mx-auto sm:w-full ">
-      <div className=" w-[80%] mx-auto sm:w-[35%] sm:max-h-[400px]">
+      <div className=" w-[80%] mx-auto  sm:w-[35%] sm:max-h-[400px]">
         <ProductCoursel
           data={data.images}
           className={"aspect-[3/4]"}
@@ -62,7 +62,7 @@ const ProductDetails = () => {
           }}
         />
       </div>
-      <div className="w-full px-2 md:px-8  sm:w-[60%]">
+      <div className="w-full my-4 sm:my-0 px-2 md:px-8  sm:w-[60%]">
         <h2 className=" text-xl font-semibold p-1 px-8 bg-slate-300 w-fit">
           {data?.brand}
         </h2>

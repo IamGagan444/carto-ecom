@@ -65,7 +65,7 @@ const CustomerProfile = () => {
       [name]: value,
     }));
   };
-
+  const orders = JSON.parse(localStorage.getItem("allOrders"));
   const handleSave = () => {
     localStorage.setItem("userData", JSON.stringify(userData));
     toast.success("profile updated");
@@ -73,7 +73,7 @@ const CustomerProfile = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen grid place-items-center">
+      <div className="h-screen grid place-items-center bg-white bottom-0 top-0 right-0 left-0">
         <Loader />
       </div>
     );
@@ -125,6 +125,7 @@ const CustomerProfile = () => {
               variant="gradient"
               color="light-blue"
               className=" bg-red-500 flex items-center justify-center"
+              onClick={() =>{orders? navigate("/checkout/order-movement-details"):toast.error("Please make orders")}}
             >
               <FiTruck className="text-2xl" /> orders
             </Button>
@@ -133,6 +134,7 @@ const CustomerProfile = () => {
               variant="gradient"
               color="light-blue"
               className=" bg-red-500 flex items-center justify-center"
+              onClick={() => navigate("/checkout/cart")}
             >
               <PiShoppingCartThin className="text-2xl" /> carts
             </Button>
